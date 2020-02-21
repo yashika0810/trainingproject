@@ -1,0 +1,44 @@
+ {% load staticfiles %}
+ {% load i18n %}
+ {% load account socialaccount %}
+ 
+ {% block head_title %}{% endblock %}
+ 
+ {% block content %}
+ 
+ <head>
+     <meta charset="UTF-8">
+     <title>Sign up form with social</title>
+     <!--=======Font Open Sans======-->
+     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+     <!--=======Font Awesome======-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+     <!--=======Custom Style======-->
+     <link rel="stylesheet" href="{% static 'index.css' %}" type=text/css>
+ </head>
+ 
+
+   
+        <form id="login-form" method="post" action="{% url 'account_signup' %}">
+            
+            <div class="input-field"><br>
+
+            <h1  style="text-align: center; color: rgb(65, 63, 63);">{% trans "Sign Up" %}</h1><br>
+
+            <p style="text-align: center;">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">Sign in</a>.{% endblocktrans %}</p>
+            <div class="divider">
+                <span>or</span>
+            </div>
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+            <input type="hidden"   name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <input type="submit" value="Sign up" class="signupbtn"></button><br>
+          
+          
+    
+            </div>
+        </form>
+
+{% endblock %}

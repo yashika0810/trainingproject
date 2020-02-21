@@ -1,0 +1,83 @@
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% endblock %}
+
+{% block content %}
+<!-- templates/home.html
+{% load staticfiles %}
+{% load socialaccount %}
+
+<head>
+    <link href="{% static 'index.css' %}" rel='stylesheet' type="text/css"/>
+</head>
+<div class='Person'>
+    <h1>Consultadd</h1>
+    {% if user.is_authenticated %}
+    <p>Welcome {{ user.username }} !!!</p>
+    <p><a href="{% url 'account_logout' %}" > <button class='sign'>Log out</button></a>
+    {% else %}
+    <p><a href="{% url 'account_signup' %}"> <button class='sign'>Sign Up</button></a></p>
+    <p><a href="{% url 'account_login' %}"><button class='sign'>Login</button></a></p>
+    <p><a href="{% provider_login_url 'google' %}"><button class='sign'>Sign Up with google</button></a></p>
+    {% endif %}
+</div> -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login form with social</title>
+    <!--=======Font Open Sans======-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--=======Font Awesome======-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--=======Custom Style======-->
+    <link rel="stylesheet" href="{% static 'index.css' %}" type=text/css>
+</head>
+
+
+<form action="{% url 'account_login' %}" method="POST" id="login-form">
+    <div class="head">Login</div>
+    <div class="social">
+      <h4>Connect with</h4>
+      <ul>
+        <li> 
+        <a href="" class="facebook">
+          <span class="fa fa-facebook"></span>
+        </a>
+        </li>
+        <li>
+          <a href="" class="twitter">
+            <span class="fa fa-twitter"></span>
+          </a>
+        </li>
+        <li>
+          <a href="{% provider_login_url 'google' %}" class="google-plus">
+            <span class="fa fa-google-plus"></span>
+          </a>
+        </li>
+      </ul>
+     </div>
+    
+  
+     <div class="divider">
+       <span>or</span>
+     </div>
+     
+    <div class="input-field">
+     
+        {% csrf_token %}
+        {{ form.as_p }}
+  
+        
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <input type="submit" value="Log in">{% trans "" %}</button>
+
+      <p class="text-p">Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+      <p class="text-p">Forgot password? <a href="{% url 'account_reset_password' %}">Forgot password?</a></p>
+    </div>
+</form>
+{% endblock %}
+
